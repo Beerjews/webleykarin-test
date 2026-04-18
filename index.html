@@ -1,1 +1,784 @@
-<h1> github pages</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LaborIA — Asesores con IA para tu empresa</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1e3a5f;
+      --accent: #2e86de;
+      --accent2: #00c9a7;
+      --light: #f4f7fb;
+      --dark: #0f1f33;
+      --gray: #6b7a8d;
+      --card-bg: #ffffff;
+      --radius: 16px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e0e8f0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 6vw; height: 68px;
+    }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+    .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a { text-decoration: none; color: var(--primary); font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #fff; border: none;
+      padding: .55rem 1.4rem; border-radius: 8px; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+    }
+    .nav-cta:hover { background: #1a6abf; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary) 0%, #163460 55%, #1b4d7e 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 6vw 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-inner { position: relative; max-width: 800px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      color: #fff; padding: .4rem 1rem; border-radius: 999px;
+      font-size: .85rem; font-weight: 600; margin-bottom: 1.8rem; letter-spacing: .5px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 800;
+      color: #fff; line-height: 1.15; margin-bottom: 1.4rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent2); }
+    .hero p {
+      font-size: 1.18rem; color: rgba(255,255,255,0.82);
+      max-width: 600px; margin: 0 auto 2.4rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--accent2); color: var(--dark);
+      padding: .9rem 2rem; border-radius: 10px; font-weight: 700;
+      border: none; cursor: pointer; font-size: 1rem; transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,201,167,.35); }
+    .btn-outline {
+      background: transparent; color: #fff;
+      padding: .9rem 2rem; border-radius: 10px; font-weight: 600;
+      border: 2px solid rgba(255,255,255,0.45); cursor: pointer; font-size: 1rem;
+      transition: background .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); }
+    .hero-stats {
+      display: flex; gap: 3rem; justify-content: center; margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat strong { display: block; font-size: 2rem; font-weight: 800; color: var(--accent2); }
+    .stat span { font-size: .9rem; color: rgba(255,255,255,.7); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 6vw; }
+    .section-label {
+      font-size: .8rem; font-weight: 700; letter-spacing: 2px;
+      color: var(--accent); text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title { font-size: clamp(1.7rem, 3.5vw, 2.6rem); font-weight: 800; color: var(--primary); margin-bottom: 1rem; }
+    .section-sub { color: var(--gray); font-size: 1.05rem; max-width: 580px; }
+    .center { text-align: center; }
+    .center .section-sub { margin: 0 auto; }
+
+    /* ── AGENTS ── */
+    #agentes { background: #fff; }
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem; margin-top: 3rem;
+    }
+    .agent-card {
+      background: var(--light);
+      border: 1.5px solid #e0e8f2;
+      border-radius: var(--radius);
+      padding: 2rem 1.8rem;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      cursor: default;
+    }
+    .agent-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 40px rgba(30,58,95,.12);
+      border-color: var(--accent);
+    }
+    .agent-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; margin-bottom: 1.2rem;
+    }
+    .agent-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--primary); margin-bottom: .5rem; }
+    .agent-card p { font-size: .95rem; color: var(--gray); }
+    .agent-tag {
+      display: inline-block; margin-top: 1rem;
+      background: rgba(46,134,222,.1); color: var(--accent);
+      font-size: .75rem; font-weight: 700; padding: .25rem .7rem;
+      border-radius: 999px; letter-spacing: .5px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    #como-funciona { background: var(--light); }
+    .steps { display: flex; gap: 2rem; margin-top: 3rem; flex-wrap: wrap; }
+    .step {
+      flex: 1; min-width: 220px;
+      background: #fff; border-radius: var(--radius);
+      padding: 2rem 1.8rem; position: relative;
+      border: 1.5px solid #e0e8f2;
+    }
+    .step-number {
+      position: absolute; top: -18px; left: 1.8rem;
+      background: var(--accent); color: #fff;
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: .9rem;
+    }
+    .step h3 { font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: .5rem; }
+    .step p { font-size: .92rem; color: var(--gray); }
+
+    /* ── CHAT DEMO ── */
+    #demo {
+      background: linear-gradient(135deg, #0f1f33 0%, #1e3a5f 100%);
+      padding: 100px 6vw;
+    }
+    #demo .section-title { color: #fff; }
+    #demo .section-sub { color: rgba(255,255,255,.7); }
+    #demo .section-label { color: var(--accent2); }
+    .demo-wrapper {
+      display: flex; gap: 3rem; align-items: center; flex-wrap: wrap; margin-top: 3rem;
+    }
+    .demo-text { flex: 1; min-width: 280px; }
+    .demo-text ul { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
+    .demo-text li {
+      display: flex; align-items: flex-start; gap: .8rem;
+      color: rgba(255,255,255,.85); font-size: .97rem;
+    }
+    .demo-text li::before {
+      content: '✓'; flex-shrink: 0;
+      background: var(--accent2); color: var(--dark);
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .75rem; font-weight: 800; margin-top: 2px;
+    }
+    .chat-box {
+      flex: 1; min-width: 300px; max-width: 460px;
+      background: #fff; border-radius: 20px; overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+    }
+    .chat-header {
+      background: var(--primary); color: #fff;
+      padding: 1rem 1.4rem; display: flex; align-items: center; gap: .8rem;
+    }
+    .chat-avatar {
+      width: 38px; height: 38px; background: var(--accent2);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .chat-header-info strong { display: block; font-size: .95rem; }
+    .chat-header-info span { font-size: .78rem; color: rgba(255,255,255,.7); }
+    .online-dot {
+      width: 8px; height: 8px; background: var(--accent2);
+      border-radius: 50%; margin-left: auto;
+      box-shadow: 0 0 0 3px rgba(0,201,167,.3);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+    .chat-messages { padding: 1.2rem; display: flex; flex-direction: column; gap: .9rem; height: 280px; overflow-y: auto; }
+    .msg { max-width: 80%; }
+    .msg-bot { align-self: flex-start; }
+    .msg-user { align-self: flex-end; }
+    .msg-bot .bubble {
+      background: #f0f4f8; color: var(--dark);
+      padding: .7rem 1rem; border-radius: 14px 14px 14px 4px;
+      font-size: .88rem; line-height: 1.5;
+    }
+    .msg-user .bubble {
+      background: var(--accent); color: #fff;
+      padding: .7rem 1rem; border-radius: 14px 14px 4px 14px;
+      font-size: .88rem; line-height: 1.5;
+    }
+    .msg-label { font-size: .72rem; color: var(--gray); margin-bottom: .3rem; }
+    .msg-user .msg-label { text-align: right; }
+    .chat-input-row {
+      display: flex; gap: .5rem; padding: 1rem; border-top: 1px solid #e0e8f0;
+    }
+    .chat-input {
+      flex: 1; border: 1.5px solid #e0e8f0; border-radius: 10px;
+      padding: .55rem .9rem; font-size: .88rem; outline: none;
+      transition: border-color .2s;
+    }
+    .chat-input:focus { border-color: var(--accent); }
+    .chat-send {
+      background: var(--accent); color: #fff; border: none;
+      padding: .55rem 1rem; border-radius: 10px; cursor: pointer;
+      font-size: 1rem; transition: background .2s;
+    }
+    .chat-send:hover { background: #1a6abf; }
+
+    /* ── TOPICS ── */
+    #temas { background: #fff; }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem; margin-top: 3rem;
+    }
+    .topic-chip {
+      display: flex; align-items: center; gap: .8rem;
+      background: var(--light); border: 1.5px solid #e0e8f2;
+      border-radius: 12px; padding: 1rem 1.2rem;
+      font-weight: 600; color: var(--primary); font-size: .95rem;
+      transition: background .2s, border-color .2s;
+    }
+    .topic-chip:hover { background: #e8f0fd; border-color: var(--accent); }
+    .topic-chip .ico { font-size: 1.4rem; }
+
+    /* ── PLANS ── */
+    #planes { background: var(--light); }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem; margin-top: 3rem;
+    }
+    .plan-card {
+      background: #fff; border: 1.5px solid #e0e8f2;
+      border-radius: var(--radius); padding: 2.2rem 2rem;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .plan-card.featured {
+      border-color: var(--accent); background: var(--primary); color: #fff;
+      transform: scale(1.03);
+    }
+    .plan-card:hover:not(.featured) { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(30,58,95,.1); }
+    .plan-tag {
+      font-size: .75rem; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: .8rem;
+    }
+    .plan-card.featured .plan-tag { color: var(--accent2); }
+    .plan-card h3 { font-size: 1.3rem; font-weight: 800; margin-bottom: .3rem; }
+    .plan-card.featured h3 { color: #fff; }
+    .plan-price { font-size: 2.4rem; font-weight: 800; color: var(--primary); margin: .8rem 0; }
+    .plan-card.featured .plan-price { color: var(--accent2); }
+    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--gray); }
+    .plan-card.featured .plan-price span { color: rgba(255,255,255,.6); }
+    .plan-card ul { list-style: none; margin: 1.2rem 0 1.8rem; display: flex; flex-direction: column; gap: .6rem; }
+    .plan-card li { font-size: .92rem; color: var(--gray); display: flex; gap: .6rem; }
+    .plan-card.featured li { color: rgba(255,255,255,.8); }
+    .plan-card li::before { content: '✓'; color: var(--accent2); font-weight: 700; }
+    .btn-plan {
+      width: 100%; padding: .8rem; border-radius: 10px;
+      font-weight: 700; font-size: .95rem; border: none; cursor: pointer;
+      background: var(--accent); color: #fff; transition: background .2s;
+    }
+    .btn-plan:hover { background: #1a6abf; }
+    .plan-card.featured .btn-plan { background: var(--accent2); color: var(--dark); }
+    .plan-card.featured .btn-plan:hover { background: #00b095; }
+
+    /* ── TESTIMONIALS ── */
+    #testimonios { background: #fff; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem; margin-top: 3rem;
+    }
+    .testimonial {
+      background: var(--light); border-radius: var(--radius);
+      padding: 2rem; border: 1.5px solid #e0e8f2;
+    }
+    .stars { color: #f4c430; font-size: 1.1rem; margin-bottom: .8rem; }
+    .testimonial p { font-size: .95rem; color: var(--dark); font-style: italic; margin-bottom: 1.2rem; }
+    .testimonial-author { display: flex; align-items: center; gap: .8rem; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 700; color: #fff;
+    }
+    .testimonial-author strong { display: block; font-size: .92rem; color: var(--primary); }
+    .testimonial-author span { font-size: .8rem; color: var(--gray); }
+
+    /* ── CTA ── */
+    #contacto {
+      background: linear-gradient(135deg, var(--accent2) 0%, #00a88c 100%);
+      text-align: center; padding: 100px 6vw;
+    }
+    #contacto h2 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; color: var(--dark); margin-bottom: 1rem; }
+    #contacto p { font-size: 1.1rem; color: rgba(0,0,0,.6); margin-bottom: 2.4rem; max-width: 560px; margin-inline: auto; margin-bottom: 2.4rem; }
+    .contact-form {
+      max-width: 520px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .contact-form input, .contact-form select, .contact-form textarea {
+      padding: .85rem 1.1rem; border: none; border-radius: 10px;
+      font-size: .95rem; font-family: inherit; outline: none;
+      background: rgba(255,255,255,.9); color: var(--dark);
+      transition: background .2s;
+    }
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus { background: #fff; }
+    .contact-form textarea { resize: vertical; min-height: 110px; }
+    .contact-form button {
+      background: var(--primary); color: #fff;
+      padding: 1rem; border: none; border-radius: 10px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+    .contact-form button:hover { background: var(--dark); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); color: rgba(255,255,255,.6);
+      padding: 3rem 6vw; display: flex;
+      justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo { font-size: 1.3rem; font-weight: 800; color: #fff; }
+    .footer-logo span { color: var(--accent); }
+    footer nav ul { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    footer nav a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .88rem; transition: color .2s; }
+    footer nav a:hover { color: #fff; }
+    .footer-copy { font-size: .82rem; }
+
+    /* ── FLOATING CHAT BTN ── */
+    .float-btn {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+      background: var(--accent2); color: var(--dark);
+      width: 60px; height: 60px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; cursor: pointer; border: none;
+      box-shadow: 0 8px 24px rgba(0,201,167,.45);
+      transition: transform .25s, box-shadow .25s;
+      animation: floatBounce 3s ease-in-out infinite;
+    }
+    .float-btn:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(0,201,167,.55); }
+    @keyframes floatBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hero-stats { gap: 2rem; }
+      .demo-wrapper { flex-direction: column; }
+      .chat-box { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Labor<span>IA</span></div>
+  <ul>
+    <li><a href="#agentes">Agentes IA</a></li>
+    <li><a href="#temas">Temas</a></li>
+    <li><a href="#planes">Planes</a></li>
+    <li><a href="#testimonios">Clientes</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Solicitar Demo</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">🤖 Inteligencia Artificial aplicada al mundo laboral</div>
+    <h1>Asesores con IA para<br><em>cumplimiento laboral</em><br>y bienestar organizacional</h1>
+    <p>Capacita y asesora a tus equipos en Ley Karin, clima laboral, prevención de acoso y normativa laboral vigente — disponible 24/7, sin esperas.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary" onclick="document.getElementById('agentes').scrollIntoView({behavior:'smooth'})">Conocer los Agentes IA</button>
+      <button class="btn-outline" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">Ver Demo en Vivo</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>+500</strong><span>empresas asesoradas</span></div>
+      <div class="stat"><strong>24/7</strong><span>disponibilidad</span></div>
+      <div class="stat"><strong>98%</strong><span>satisfacción</span></div>
+      <div class="stat"><strong>&lt;30s</strong><span>tiempo de respuesta</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section id="agentes">
+  <div class="center">
+    <div class="section-label">Nuestros Agentes IA</div>
+    <h2 class="section-title">Un experto especializado para cada necesidad</h2>
+    <p class="section-sub">Cada agente está entrenado en una materia específica y responde de forma precisa, empática y apegada a la normativa vigente en Chile.</p>
+  </div>
+  <div class="agents-grid">
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#fff0f0;">⚖️</div>
+      <h3>Agente Ley Karin</h3>
+      <p>Asesora sobre la Ley 21.643: protocolos de denuncia, plazos legales, responsabilidades del empleador y derechos del trabajador ante acoso laboral y sexual.</p>
+      <span class="agent-tag">Ley 21.643</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#f0fff8;">🌡️</div>
+      <h3>Agente Clima Laboral</h3>
+      <p>Diagnostica el estado emocional de tus equipos, entrega recomendaciones para mejorar el ambiente de trabajo y previene conflictos antes de que escalen.</p>
+      <span class="agent-tag">Bienestar</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#f0f4ff;">📋</div>
+      <h3>Agente Compliance Laboral</h3>
+      <p>Orienta sobre Reglamento Interno, contrato de trabajo, jornada laboral, finiquitos y obligaciones legales del empleador según el Código del Trabajo.</p>
+      <span class="agent-tag">Código del Trabajo</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#fffbf0;">🎓</div>
+      <h3>Agente Capacitación</h3>
+      <p>Diseña rutas de aprendizaje personalizadas, aplica micro-cursos interactivos y evalúa el nivel de conocimiento de los colaboradores en tiempo real.</p>
+      <span class="agent-tag">E-Learning IA</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#f5f0ff;">🧠</div>
+      <h3>Agente Salud Mental</h3>
+      <p>Ofrece contención emocional de primer nivel, detecta señales de burnout y deriva a profesionales cuando es necesario, respetando la confidencialidad.</p>
+      <span class="agent-tag">Bienestar Psicológico</span>
+    </div>
+
+    <div class="agent-card">
+      <div class="agent-icon" style="background:#f0faff;">🛡️</div>
+      <h3>Agente Prevención de Riesgos</h3>
+      <p>Asesora en materias de seguridad laboral, protocolos de emergencia, obligaciones del CPHS y cumplimiento de normativas de prevención de riesgos.</p>
+      <span class="agent-tag">Seguridad Laboral</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="como-funciona">
+  <div>
+    <div class="section-label">¿Cómo funciona?</div>
+    <h2 class="section-title">Implementación simple, resultados inmediatos</h2>
+    <p class="section-sub">En menos de 48 horas tus equipos tienen acceso a sus asesores IA personalizados.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Diagnóstico inicial</h3>
+      <p>Conversamos contigo para entender las necesidades de tu empresa, rubros, cantidad de colaboradores y áreas críticas.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Configuración personalizada</h3>
+      <p>Configuramos los agentes IA con el contexto de tu empresa, tus políticas internas y los temas prioritarios.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Activación y acceso</h3>
+      <p>Tus colaboradores acceden vía web, app o integración con tus herramientas (Teams, Slack, intranet).</p>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Reportes y mejora continua</h3>
+      <p>Recibes informes periódicos de uso, áreas de consulta frecuente y recomendaciones para tu empresa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO CHAT -->
+<section id="demo">
+  <div class="demo-wrapper">
+    <div class="demo-text">
+      <div class="section-label">Demo en Vivo</div>
+      <h2 class="section-title" style="color:#fff">Habla con nuestro Agente Ley Karin ahora</h2>
+      <p class="section-sub">Haz una pregunta real y comprueba la precisión y rapidez de nuestros asesores IA.</p>
+      <ul>
+        <li>Respuestas basadas en normativa chilena vigente</li>
+        <li>Lenguaje claro y sin tecnicismos innecesarios</li>
+        <li>Derivación a especialistas humanos cuando corresponde</li>
+        <li>Registro confidencial de cada consulta</li>
+        <li>Disponible en español e inglés</li>
+      </ul>
+    </div>
+    <div class="chat-box">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <strong>Agente Ley Karin</strong>
+          <span>Especialista en Ley 21.643</span>
+        </div>
+        <div class="online-dot"></div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg msg-bot">
+          <div class="msg-label">Agente IA</div>
+          <div class="bubble">Hola 👋 Soy tu asesor especializado en Ley Karin (Ley 21.643). ¿En qué puedo ayudarte hoy? Puedes preguntarme sobre protocolos de denuncia, plazos, obligaciones del empleador o derechos del trabajador.</div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input class="chat-input" id="chatInput" type="text" placeholder="Escribe tu consulta…" />
+        <button class="chat-send" onclick="sendMessage()">➤</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section id="temas">
+  <div class="center">
+    <div class="section-label">Materias cubiertas</div>
+    <h2 class="section-title">Todo lo que tu empresa necesita en un solo lugar</h2>
+    <p class="section-sub">Nuestros agentes están actualizados con la normativa laboral vigente en Chile.</p>
+  </div>
+  <div class="topics-grid">
+    <div class="topic-chip"><span class="ico">⚖️</span> Ley Karin (21.643)</div>
+    <div class="topic-chip"><span class="ico">🌡️</span> Clima laboral</div>
+    <div class="topic-chip"><span class="ico">🚫</span> Acoso laboral</div>
+    <div class="topic-chip"><span class="ico">💬</span> Acoso sexual</div>
+    <div class="topic-chip"><span class="ico">🧠</span> Salud mental en el trabajo</div>
+    <div class="topic-chip"><span class="ico">📄</span> Contratos y finiquitos</div>
+    <div class="topic-chip"><span class="ico">🕐</span> Jornada y descansos</div>
+    <div class="topic-chip"><span class="ico">🏥</span> Licencias médicas</div>
+    <div class="topic-chip"><span class="ico">🛡️</span> Prevención de riesgos</div>
+    <div class="topic-chip"><span class="ico">👩‍👩‍👧</span> Diversidad e inclusión</div>
+    <div class="topic-chip"><span class="ico">📊</span> Reglamento interno</div>
+    <div class="topic-chip"><span class="ico">🏢</span> Trabajo remoto</div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="planes">
+  <div class="center">
+    <div class="section-label">Planes</div>
+    <h2 class="section-title">Elige el plan ideal para tu empresa</h2>
+    <p class="section-sub">Sin permanencia mínima. Cancela o cambia de plan cuando quieras.</p>
+  </div>
+  <div class="plans-grid">
+
+    <div class="plan-card">
+      <div class="plan-tag">Starter</div>
+      <h3>Básico</h3>
+      <div class="plan-price">$89.990 <span>/ mes</span></div>
+      <ul>
+        <li>Hasta 50 colaboradores</li>
+        <li>2 agentes IA incluidos</li>
+        <li>Agente Ley Karin</li>
+        <li>Agente Clima Laboral</li>
+        <li>Reportes mensuales</li>
+        <li>Soporte por email</li>
+      </ul>
+      <button class="btn-plan">Comenzar ahora</button>
+    </div>
+
+    <div class="plan-card featured">
+      <div class="plan-tag">⭐ Más popular</div>
+      <h3>Profesional</h3>
+      <div class="plan-price">$189.990 <span>/ mes</span></div>
+      <ul>
+        <li>Hasta 200 colaboradores</li>
+        <li>4 agentes IA incluidos</li>
+        <li>Todos los temas cubiertos</li>
+        <li>Capacitaciones interactivas</li>
+        <li>Reportes semanales</li>
+        <li>Soporte prioritario 24/7</li>
+      </ul>
+      <button class="btn-plan">Comenzar ahora</button>
+    </div>
+
+    <div class="plan-card">
+      <div class="plan-tag">Enterprise</div>
+      <h3>Corporativo</h3>
+      <div class="plan-price">A medida</div>
+      <ul>
+        <li>Colaboradores ilimitados</li>
+        <li>Todos los agentes IA</li>
+        <li>Integración con HR systems</li>
+        <li>Capacitaciones personalizadas</li>
+        <li>Account Manager dedicado</li>
+        <li>SLA garantizado</li>
+      </ul>
+      <button class="btn-plan">Contactar ventas</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonios">
+  <div class="center">
+    <div class="section-label">Clientes</div>
+    <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub">Empresas de todos los tamaños confían en LaborIA para su cumplimiento y bienestar laboral.</p>
+  </div>
+  <div class="testimonials-grid">
+
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"Implementamos el Agente Ley Karin después de que la ley entró en vigencia. En una semana todos nuestros jefes de área ya sabían cómo actuar ante una denuncia. Increíble."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#2e86de;">MR</div>
+        <div>
+          <strong>María Rodríguez</strong>
+          <span>Gerente de RR.HH. — Retail 450 personas</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"El agente de clima laboral nos ayudó a detectar un foco de conflicto antes de que escalara. Ahorramos una investigación costosa y mantuvimos al equipo unido."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#00c9a7;">CL</div>
+        <div>
+          <strong>Carlos López</strong>
+          <span>Director de Personas — Tecnología 120 colaboradores</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <p>"La disponibilidad 24/7 fue clave. Nuestros colaboradores del turno noche también pueden consultar sus dudas sin esperar al día siguiente. Eso marca la diferencia."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar" style="background:#6c5ce7;">AP</div>
+        <div>
+          <strong>Ana Pereira</strong>
+          <span>Subgerente Legal — Industria manufactura</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section id="contacto">
+  <h2>¿Listo para proteger<br>a tu equipo?</h2>
+  <p>Solicita una demo gratuita de 30 minutos. Te mostramos los agentes en acción con casos reales de tu industria.</p>
+  <form class="contact-form" onsubmit="handleForm(event)">
+    <input type="text" placeholder="Nombre completo" required />
+    <input type="email" placeholder="Correo corporativo" required />
+    <input type="text" placeholder="Empresa y cantidad de colaboradores" required />
+    <select required>
+      <option value="" disabled selected>¿Qué necesita tu empresa?</option>
+      <option>Ley Karin — Protocolo de denuncias</option>
+      <option>Clima laboral y bienestar</option>
+      <option>Capacitación masiva de equipos</option>
+      <option>Compliance laboral completo</option>
+      <option>Salud mental en el trabajo</option>
+      <option>Todo lo anterior</option>
+    </select>
+    <textarea placeholder="Cuéntanos brevemente el desafío que quieres resolver…"></textarea>
+    <button type="submit">Solicitar Demo Gratuita →</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Labor<span>IA</span></div>
+  <nav>
+    <ul>
+      <li><a href="#agentes">Agentes</a></li>
+      <li><a href="#temas">Temas</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#">Política de privacidad</a></li>
+      <li><a href="#">Términos de uso</a></li>
+    </ul>
+  </nav>
+  <div class="footer-copy">© 2025 LaborIA. Todos los derechos reservados.</div>
+</footer>
+
+<!-- FLOATING BTN -->
+<button class="float-btn" title="Hablar con un agente IA" onclick="document.getElementById('demo').scrollIntoView({behavior:'smooth'})">💬</button>
+
+<script>
+  /* ── CHAT DEMO ── */
+  const responses = {
+    default: "Puedo orientarte sobre ese tema. Te recomiendo revisar el Artículo 2° del Código del Trabajo y complementarlo con los protocolos de la Ley 21.643. ¿Quieres que profundice en algún aspecto específico?",
+    karin: "La Ley Karin (21.643) establece que el empleador tiene la obligación de recibir la denuncia, designar un investigador externo o interno, y resolver en un plazo máximo de 30 días hábiles. Durante el proceso debe adoptar medidas de resguardo para la persona denunciante.",
+    acoso: "El acoso laboral es toda conducta que constituya agresión u hostigamiento reiterado por parte del empleador o de uno o más trabajadores. La Ley Karin amplió el concepto e incorporó la violencia en el trabajo de terceros. El trabajador afectado puede denunciar directamente ante la Inspección del Trabajo.",
+    denuncia: "Para interponer una denuncia por Ley Karin debes: (1) Dirigirte a RR.HH. o al canal interno de tu empresa; (2) Presentar los hechos por escrito; (3) El empleador debe iniciar la investigación en 3 días hábiles. También puedes denunciar directamente en la Inspección del Trabajo más cercana.",
+    clima: "Mejorar el clima laboral implica trabajar en tres ejes: comunicación efectiva, liderazgo positivo y reconocimiento. Te recomiendo aplicar una encuesta de clima trimestral y generar espacios de retroalimentación entre jefaturas y equipos. ¿Te gustaría que te sugiera un protocolo específico?",
+    plazo: "Según la Ley 21.643, el empleador debe: recibir la denuncia de inmediato, iniciar la investigación dentro de 3 días hábiles, y concluirla en un plazo de 30 días hábiles. Si la investigación la realiza la Inspección del Trabajo, el plazo es de 30 días desde que se recibe el expediente.",
+  };
+
+  function getResponse(msg) {
+    const m = msg.toLowerCase();
+    if (m.includes('plazo') || m.includes('días') || m.includes('tiempo')) return responses.plazo;
+    if (m.includes('denuncia') || m.includes('denunciar') || m.includes('cómo')) return responses.denuncia;
+    if (m.includes('acoso') || m.includes('hostigamiento') || m.includes('maltrato')) return responses.acoso;
+    if (m.includes('karin') || m.includes('ley 21') || m.includes('protocolo')) return responses.karin;
+    if (m.includes('clima') || m.includes('ambiente') || m.includes('bienestar')) return responses.clima;
+    return responses.default;
+  }
+
+  function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const msgs = document.getElementById('chatMessages');
+    const text = input.value.trim();
+    if (!text) return;
+
+    // User bubble
+    msgs.innerHTML += `
+      <div class="msg msg-user">
+        <div class="msg-label">Tú</div>
+        <div class="bubble">${text}</div>
+      </div>`;
+    input.value = '';
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Typing indicator
+    const typing = document.createElement('div');
+    typing.className = 'msg msg-bot';
+    typing.id = 'typing';
+    typing.innerHTML = '<div class="msg-label">Agente IA</div><div class="bubble">Escribiendo…</div>';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    setTimeout(() => {
+      const t = document.getElementById('typing');
+      if (t) t.remove();
+      msgs.innerHTML += `
+        <div class="msg msg-bot">
+          <div class="msg-label">Agente IA</div>
+          <div class="bubble">${getResponse(text)}</div>
+        </div>`;
+      msgs.scrollTop = msgs.scrollHeight;
+    }, 1200);
+  }
+
+  document.getElementById('chatInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  /* ── CONTACT FORM ── */
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '✅ ¡Solicitud enviada! Te contactamos pronto.';
+    btn.style.background = '#0f1f33';
+    btn.disabled = true;
+  }
+</script>
+</body>
+</html>
